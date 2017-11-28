@@ -2,7 +2,7 @@ def score(game):
     result = 0
     previous_score = 0
     frame = 1
-    in_first_half = True
+    is_first_try = True
     for i, character in enumerate(game):
         if character == '/':
             result += 10 - previous_score
@@ -18,14 +18,14 @@ def score(game):
                 else:
                     result += get_value(game[i+2])
         previous_score = get_value(character)
-        if in_first_half is False:
+        if is_first_try is False:
             frame += 1
-        if in_first_half is True:
-            in_first_half = False
+        if is_first_try is True:
+            is_first_try = False
         else:
-            in_first_half = True
+            is_first_try = True
         if character == 'X' or character == 'x':
-            in_first_half = True
+            is_first_try = True
             frame += 1
     return result
 
