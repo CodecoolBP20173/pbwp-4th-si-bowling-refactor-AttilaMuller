@@ -26,7 +26,7 @@ def score(game):
         if is_first_try is False:  # updates frame if it is the second try of the player
             frame += 1
 
-        is_first_try = not is_first_try  # updates current try
+        is_first_try = not is_first_try  # updates try for next loop
 
         if character.lower() == 'x':  # in case of a strike resets current try and adds a frame
             is_first_try = True
