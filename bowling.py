@@ -1,13 +1,19 @@
 def score(game):
+
+    ''' Calculates the score from the results of the player. '''
+
     result = 0
     previous_score = 0
     frame = 1
     is_first_try = True
+
     for i, character in enumerate(game):
+
         if character == '/':
             result += 10 - previous_score
         else:
             result += get_value(character)
+
         if frame < 10 and get_value(character) == 10:
             if character == '/':
                 result += get_value(game[i+1])
@@ -17,20 +23,27 @@ def score(game):
                     result += 10 - get_value(game[i+1])
                 else:
                     result += get_value(game[i+2])
+
         previous_score = get_value(character)
+
         if is_first_try is False:
             frame += 1
+
         if is_first_try is True:
             is_first_try = False
         else:
             is_first_try = True
+
         if character.lower() == 'x':
             is_first_try = True
             frame += 1
+
     return result
 
 
 def get_value(character):
+
+    ''' Converts character into value. '''
 
     if character.lower() == 'x' or character == '/':
         return 10
