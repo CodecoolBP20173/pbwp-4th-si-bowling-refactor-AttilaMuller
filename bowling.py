@@ -11,7 +11,7 @@ def score(game):
         if frame < 10 and get_value(character) == 10:
             if character == '/':
                 result += get_value(game[i+1])
-            elif character == 'X' or character == 'x':
+            elif character.lower() == 'x':
                 result += get_value(game[i+1])
                 if game[i+2] == '/':
                     result += 10 - get_value(game[i+1])
@@ -24,7 +24,7 @@ def score(game):
             is_first_try = False
         else:
             is_first_try = True
-        if character == 'X' or character == 'x':
+        if character.lower() == 'x':
             is_first_try = True
             frame += 1
     return result
@@ -32,7 +32,7 @@ def score(game):
 
 def get_value(character):
 
-    if character == 'X' or character == 'x' or character == '/':
+    if character.lower() == 'x' or character == '/':
         return 10
     elif character == '-':
         return 0
