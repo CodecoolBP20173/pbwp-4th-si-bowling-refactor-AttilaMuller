@@ -3,18 +3,17 @@ def score(game):
     ''' Calculates the score from the results of the player. '''
 
     result = 0
-    previous_score = 0
     frame = 1
     is_first_try = True
 
     for i, character in enumerate(game):
 
-        if character == '/':
-            result += 10 - previous_score
+        if character == '/':  # Adds current try's value to result, in case of spare calculates actual try's value
+            result += 10 - get_value(game[i-1])
         else:
             result += get_value(character)
 
-        if frame < 10 and get_value(character) == 10:
+        if frame < 10 and get_value(character) == 10:  # Adds the extra points in case spare or strike
             if character == '/':
                 result += get_value(game[i+1])
             elif character.lower() == 'x':
@@ -24,17 +23,12 @@ def score(game):
                 else:
                     result += get_value(game[i+2])
 
-        previous_score = get_value(character)
-
-        if is_first_try is False:
+        if is_first_try is False:  # updates frame if it is the second try of the player
             frame += 1
 
-        if is_first_try is True:
-            is_first_try = False
-        else:
-            is_first_try = True
+        is_first_try = not is_first_try  # updates current try
 
-        if character.lower() == 'x':
+        if character.lower() == 'x':  # in case of a strike resets current try and adds a frame
             is_first_try = True
             frame += 1
 
